@@ -4,7 +4,7 @@ const mjml = require('mjml')
 
 const mjmlVersion = new Promise((resolve, reject) => {
   exec('npm view mjml version', (err, version) => {
-    if (!!err) {
+    if (err) {
       reject(err)
     } else {
       resolve(version.trim())
