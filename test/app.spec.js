@@ -22,9 +22,20 @@ const template = `
 `
 
 const { html: rendered } = mjml(template, {
-  minify: true,
+  minify: false,
   keepComments: false
 })
+
+const expectSuccess = (response, { errors = [], html, template }) => {
+  expect(response).to.have.status(200)
+  expect(response.body).to.have.property('errors')
+    .which.eql(errors)
+  expect(response.body).to.have.property('html')
+    .which.equals(html)
+  expect(response.body).to.have.property('mjml')
+    .which.equals(template)
+  expect(response.body).to.have.property('mjml_version')
+}
 
 describe('MJML server', () => {
   it('renders template', async () => {
@@ -32,19 +43,10 @@ describe('MJML server', () => {
       .post('/v1/render')
       .send({ mjml: template })
 
-    expect(response).to.have.status(200)
-    expect(response.text).to.equal(rendered)
-  })
-
-  it('renders template | json output', async () => {
-    const response = await chai.request(app)
-      .post('/v1/render')
-      .set('Accept', 'application/json')
-      .send({ mjml: template })
-
-    expect(response).to.have.status(200)
-    expect(response.body).to.have.property('html')
-      .which.equals(rendered)
+    expectSuccess(response, {
+      html: rendered,
+      template
+    })
   })
 
   describe('validation', () => {
@@ -53,7 +55,10 @@ describe('MJML server', () => {
         .post('/v1/render')
         .send({})
 
-      expect(response).to.have.status(422)
+      expect(response).to.have.status(400)
+      expect(response.body).to.have.property('message')
+      expect(response.body).to.have.property('request_id')
+      expect(response.body).to.have.property('started_at')
     })
 
     it('validates invalid syntax', async () => {
@@ -63,20 +68,14 @@ describe('MJML server', () => {
         { validationLevel: 'soft' }
       )
 
-      const expectedErrors = output.errors.map(item => ({
-        location: 'body.mjml',
-        line: item.line,
-        message: item.message,
-        tagName: item.tagName
-      }))
-
       const response = await chai.request(app)
         .post('/v1/render')
         .send({ mjml: template })
 
-      expect(response).to.have.status(422)
-      expect(response.body).to.have.property('errors')
-        .which.eql(expectedErrors)
+      expectSuccess(response, {
+        ...output,
+        template
+      })
     })
   })
 })
