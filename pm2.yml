@@ -1,0 +1,7 @@
+apps:
+  cwd: /usr/src/app
+  script: server.js
+  watch: false
+  error_file: /dev/stdout
+  out_file: /dev/stdout
+  max_restarts: 1
