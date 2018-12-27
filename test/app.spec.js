@@ -46,4 +46,37 @@ describe('MJML server', () => {
     expect(response.body).to.have.property('html')
       .which.equals(rendered)
   })
+
+  describe('validation', () => {
+    it('validates request', async () => {
+      const response = await chai.request(app)
+        .post('/v1/render')
+        .send({})
+
+      expect(response).to.have.status(422)
+    })
+
+    it('validates invalid syntax', async () => {
+      const template = `<mj-image width="100" src="/assets/img/logo-small.png"></mj-image>`
+      const output = mjml(
+        template,
+        { validationLevel: 'soft' }
+      )
+
+      const expectedErrors = output.errors.map(item => ({
+        location: 'body.mjml',
+        line: item.line,
+        message: item.message,
+        tagName: item.tagName
+      }))
+
+      const response = await chai.request(app)
+        .post('/v1/render')
+        .send({ mjml: template })
+
+      expect(response).to.have.status(422)
+      expect(response.body).to.have.property('errors')
+        .which.eql(expectedErrors)
+    })
+  })
 })
