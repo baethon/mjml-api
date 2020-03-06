@@ -7,7 +7,7 @@
     "mjml": "^4.2.1"
   },
   "name": "@baethon/mjml-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Responsive email as a service",
   "private": true,
   "author": "Radoslaw Mejer <radmen@baethon.com>",
