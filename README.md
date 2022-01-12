@@ -19,9 +19,9 @@ node server.js
 
 Supported env variables:
 
-* `NODE_PORT` (default: `3000`) port on which API will listen
+* `PORT` (default: `3000`) port on which API will listen
 
-* `NODE_HOST` (default:`0.0.0.0`) host on which API will listen
+* `HOST` (default:`0.0.0.0`) host on which API will listen
 
 ## Using Docker image
 
