@@ -1,0 +1,12 @@
+{
+  "name": "MJML API",
+  "description": "Responsive email as a service. This project exposes mjml as an API service. It's meant* to be compatible with MJML API .",
+  "repository": "https://github.com/vergissberlin/mjml-api",
+  "logo": "https://mjml.io/assets/img/svg/Logo_mjml_2.svg",
+  "keywords": [
+    "node",
+    "express",
+    "mjml",
+    "email"
+  ]
+}
