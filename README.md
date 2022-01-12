@@ -2,6 +2,8 @@
 
 This project exposes [mjml](https://mjml.io) as an API service. It's meant* to be compatible with [MJML API ](https://mjml.io/api).
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/baethon/mjml-api/tree/master)
+
 # Requirements
 
 * Node >= 8
