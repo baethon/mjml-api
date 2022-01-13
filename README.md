@@ -2,54 +2,56 @@
 
 This project exposes [mjml](https://mjml.io) as an API service. It's meant* to be compatible with [MJML API ](https://mjml.io/api).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/baethon/mjml-api/tree/master)
-
-# Requirements
+## Requirements
 
 * Node >= 8
-
 * Yarn
 
-# Running
+## Running
 
-## From sources
+### From sources
 
 ```bash
 yarn
-node server.js
+yarn start
 ```
 
-Supported env variables:
+### Using heroku
 
-* `PORT` (default: `3000`) port on which API will listen
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/baethon/mjml-api/tree/master)
 
-* `HOST` (default:`0.0.0.0`) host on which API will listen
-
-## Using Docker image
+### Using Docker image
 
 ```bash
 docker run --rm -p 3000:8080 baethon/mjml-api
 ```
 
-# API
+## Supported env variables
+
+|  Name | Alias | Default | Description |
+| ------ | ------ | ------- | ----------- |
+| `NODE_PORT` | `PORT` | `3000` | Port to listen on |
+| `NODE_HOST` | `HOST` |  `0.0.0.0` | Host to listen on |n
+
+
+
+## API
 
 This API aims to be combatible with MJML API.
 
 Yet, there're few differences:
 
-- **there's no client authorization** - make sure that API won't be publicly available
+* **there's no client authorization** - make sure that API won't be publicly available
+* `request_id` in errors will always be `NULL`
+* `started_at` will return date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
 
-- `request_id` in errors will always be `NULL`
+### Endpoints
 
-- `started_at` will return date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-
-## Endpoints
-
-### POST /v1/render
+#### POST /v1/render
 
 Renders given MJML template.
 
-**Example request:**
+##### Example request
 
 ```json
 { 
@@ -57,7 +59,7 @@ Renders given MJML template.
 }
 ```
 
-**Example response:**
+##### Example response
 
 ```json
 {
@@ -68,7 +70,7 @@ Renders given MJML template.
 }
 ```
 
-**Example errors:**
+##### Example errors
 
 ```json
 {
@@ -94,7 +96,7 @@ Renders given MJML template.
 }
 ```
 
-# Testing
+## Testing
 
 ```bash
 yarn test
