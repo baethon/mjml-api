@@ -20,8 +20,8 @@ node server.js
 Supported env variables:
 
 * `NODE_PORT` (default: `3000`) port on which API will listen
-
 * `NODE_HOST` (default:`0.0.0.0`) host on which API will listen
+* `CORS` (default:  `*` ) set to `*` to enable CORS for all origins, or set a single origin `http://example.com`
 
 ## Using Docker image
 
