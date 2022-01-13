@@ -28,12 +28,11 @@ docker run --rm -p 3000:8080 baethon/mjml-api
 
 ## Supported env variables
 
-|  Name | Alias | Default | Description |
-| ------ | ------ | ------- | ----------- |
-| `NODE_PORT` | `PORT` | `3000` | Port to listen on |
-| `NODE_HOST` | `HOST` |  `0.0.0.0` | Host to listen on |n
-
-
+|  Name       | Alias  | Default   | Description                                                                            |
+| ----------- | ------ | --------- | -------------------------------------------------------------------------------------- |
+| `NODE_PORT` | `PORT` | `3000`    | Port to listen on                                                                      |
+| `NODE_HOST` | `HOST` | `0.0.0.0` | Host to listen on                                                                      |
+| `CORS`      |        | `*`       | Set to `*` to enable CORS for all origins, or set a single origin `http://example.com` |
 
 ## API
 
